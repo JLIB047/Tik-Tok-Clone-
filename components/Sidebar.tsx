@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next'; 
-import { useRouter } from 'next';
+import useRouter  from 'next';
 import Link from 'next/link';
 import GoogleLogin from 'react-google-login'; 
 import { AiFillHome, AiOutlineMenu } from 'react-icons/ai';
 import { ImCancelCircle } from 'react-icons/im'; 
+import Discover from './Discover';
+import SuggestedAccounts from './SuggestedAccounts';
+import Footer from './Footer';
 
 
 const Sidebar = () => {
-  const [ showSidebar, setShowSidebar ] = useState(true); 
+  const [showSidebar, setShowSidebar] = useState(true); 
 
   const userProfile = false; 
 
@@ -39,12 +42,32 @@ const Sidebar = () => {
                 <div className="px-2 py-4 hidden xl:block">
                   <p className="text-gray-400">Log in to 
                   like and comment on videos</p>
+                  <div className="pr-4">
+                    <GoogleLogin 
+                      clientId = ""
+                      render= {(renderProps) => (
+                        <button
+                          className="cursor-pointer bg-white text-lg text-[#f51997] border-[1px] border-[#f51997] font-semibold px-6 py-3
+                          rounded-md outline-none w-full mt-3 hover: text-white hover:bg-[#f51997]"
+                          onClick={renderProps.onClick}
+                          disabled={renderProps.disabled}
+                          >Log In</button>
+                      )}
+                      onSuccess={() =>{}}
+                      onFailure={() => {}}
+                      cookiePolicy='single-host-origin'
+                    />
+                    </div>
                   </div>
               )}
+              <Discover />
+              <SuggestedAccounts />
+              <Footer />
+
           </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default Sidebar
