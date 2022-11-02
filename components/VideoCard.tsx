@@ -11,12 +11,21 @@ interface IProps{
     post: Video;
 }
 
+/* Name props from components point of view rather than the context in which it is being used */
+/** All React components must act like pure function in respect to their props */
 const VideoCard: NextPage<IProps> = ({ post }) => {
-    console.log(post.caption);
+    /**State is similar to props, but it is private and fully controlled by the component */
 
+    /** isHover is set to the inital argument(false), meaning nothing happens*/
     const [isHover, setIsHover] = useState(false);
     const [playing, setPlaying] = useState(false);
     const [isVideoMuted, setIsVideoMuted] = useState(false);
+    /** useRef is like a box that can hold a mutable value in its current property*/
+    /** the returned object will persist for the full life time of the component ie VideoCard */
+    /** useRef is used to managing focus, text selection and media playback 
+     * triggering imperative animations
+     * to integrate with third-party DOM librairies 
+    */
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const onVideoPress = () => {
@@ -64,6 +73,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
             </div>
         </div>
         <div className='lg:ml-20 flex gap-4 relative'>
+           {/** once mouse hover over component the state is changed to true */}
             <div onMouseEnter={() => {setIsHover(true)}}
                 onMouseLeave={() => {setIsHover(false)}}
                 className='rounded-3xl'>
@@ -75,7 +85,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
 
                     </video>
                 </Link>
-                
+                {/** isHover state allows playing and isVideoMuted state to appear as well */}
                 {isHover &&(
                     <div className='absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] p-3'>
                         {playing ? (

@@ -9,6 +9,8 @@ import '../styles/globals.css'
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [isSSR, setIsSSR] = useState(true);
 
+  /** mutations, subscriptions, timers, logging and other side effects cannont be in the body of the function component */
+  /** useEffect allows your function to access effects outside your app */
   useEffect(() => {
     setIsSSR(false);
   }, []);
